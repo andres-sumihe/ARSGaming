@@ -4,9 +4,9 @@
 	<title>Login Page</title>
 </head>
 <script>
-function alertUser(msg) {
-alert(msg);
-}
+	function alertUser(msg) {
+		alert(msg);
+	}
 </script>
 <body onload="alertUser('Username atau Password Salah')">
 	<form action="checkLogin.php" method="post">
