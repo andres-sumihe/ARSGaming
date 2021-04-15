@@ -3,7 +3,12 @@
 <head>
 	<title>Login Page</title>
 </head>
-<body>
+<script>
+function alertUser(msg) {
+alert(msg);
+}
+</script>
+<body onload="alertUser('Username atau Password Salah')">
 	<form action="checkLogin.php" method="post">
 		<label>Username</label>
 		<input type="text" name="username">
