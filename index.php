@@ -25,6 +25,11 @@
 </head>
 
 <body>
+    <form method="post" action="checkLogout.php">
+        <br>
+        <br>
+        <input type="submit" name="submit" value="Logout">
+    </form>
 
     <h2>ARS GAMING</h2>
     <span id='ct5'></span>
@@ -46,22 +51,13 @@
             
         </div>
     </div>
-<<<<<<< HEAD
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
     <div id="watchgroup">
         <div class="basic stopwatch"></div> 
         <div class="basic stopwatch"></div>
     </div>
-
-=======
-    <form method="post" action="checkLogout.php">
-        <br>
-        <br>
-        <input type="submit" name="submit" value="Logout">
-    </form>
->>>>>>> f3c2c58481aaad15ae8209dad7f30911527a8a01
     <script src="main.js"></script>
 </body>
 </html>
