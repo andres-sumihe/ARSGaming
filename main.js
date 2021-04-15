@@ -53,6 +53,10 @@ function timerCycle() {
 
 function resetTimer() {
     timer.innerHTML = '00:00:00';
+    stoptime = true;
+    hr = 0;
+    sec = 0;
+    min = 0;
 }
 function display_ct5() {
     var x = new Date()
