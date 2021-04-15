@@ -30,13 +30,16 @@
                 <td>: </td>
             </tr>
         </table>
-        <div class="contaioner">
-            <ul id="buttons">
-                <li><button onclick="startTimer()">Start</button></li>
-                <li><button onclick="stopTimer()">Stop</button></li>
-                <li><button onclick="resetTimer()">Reset</button></li>
-            </ul>
+        <div class="container">
+            
         </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    <div id="watchgroup">
+        <div class="basic stopwatch"></div> 
+        <div class="basic stopwatch"></div>
     </div>
 
     <script src="main.js"></script>
