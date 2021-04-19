@@ -18,9 +18,9 @@ var stopwatch =( async (elem, id, options )=> {
   var waktu_mulai = data[0].waktu_mulai;
   console.log(data[0].waktu_mulai);
   var timer = createTimer(), 
-    startButton = createButton("start", start),
-    stopButton = createButton("stop", stop),
-    resetButton = createButton("reset", reset),
+    startButton = createButton("start", start, "btn btn-success"),
+    stopButton = createButton("stop", stop, "btn btn-danger"),
+    resetButton = createButton("reset", reset, "btn btn-warning"),
     divButton = createDiv("button-block"),
     table = createTable(),
     tr1 = createTr(),
@@ -54,7 +54,6 @@ var stopwatch =( async (elem, id, options )=> {
   elem.appendChild(divButton);
 
   var mogaJadiHehe = document.getElementById('biayaValue'+id);
-  // initialize
   reset();
 
   function createTimer() {
@@ -81,8 +80,9 @@ var stopwatch =( async (elem, id, options )=> {
     return a;
   }
 
-  function createButton(action, handler) {
+  function createButton(action, handler, className) {
     var a = document.createElement("button");
+    a.className = className;
     a.href = "#" + action;
     a.innerHTML = action;
     a.addEventListener("click", function(event) {
@@ -98,7 +98,6 @@ var stopwatch =( async (elem, id, options )=> {
     var x = new Date(+waktu_mulai);
     var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
     jamMulai = x.getHours()+ ":" +  x.getMinutes() + ":" +  x.getSeconds()  + ampm;
-    // console.log(jamMulai)
     tdJamMulaiValue.innerHTML = ": "+jamMulai;
     interval = setInterval(update, 1000);
     var h = Math.floor(waktu / (1000 * 60 * 60)) % 24;
@@ -118,6 +117,7 @@ var stopwatch =( async (elem, id, options )=> {
     harga = Math.floor(detik / 288) * 400;
     if(Math.floor(detik/288) % 12 == 0)
     harga+=200;
+    harga = 500 * Math.round(harga/500)
     mogaJadiHehe.innerHTML = ": Rp. "+ harga.toFixed(2);
   }
 
@@ -133,7 +133,6 @@ var stopwatch =( async (elem, id, options )=> {
         name: "tv"+id,
         time: offset
       }, function(response) {
-        // Log the response to the console
         console.log("Response: "+response);
       });
     }
@@ -143,6 +142,7 @@ var stopwatch =( async (elem, id, options )=> {
     if (interval) {
       clearInterval(interval);
       interval = null;
+      harga = 0;
     }
   }
 
@@ -172,10 +172,14 @@ var stopwatch =( async (elem, id, options )=> {
     if (s < 10) {
       s = "0" + s;
     }
-    if(m%5 == 0 ) 
-    harga = Math.floor(clock/1000 / 288) * 400;
-    else if (h >=59)
-    harga += 200;
+    if(m%5 == 0 ) {
+      harga = Math.floor(clock/1000 / 288) * 400;
+      harga = 500 * Math.round(harga/500);
+    }
+    else if (h >=59) {
+      harga += 200;
+      harga = 500 * Math.round(harga/500);
+    }
     timer.innerHTML = h + ':' + m + ':' + s ;
     mogaJadiHehe.innerHTML = ": Rp. "+ harga.toFixed(2);
 
@@ -213,8 +217,3 @@ function display_c5(){
     mytime=setTimeout('display_ct5()',refresh)
 }
 display_c5()
-
-window.addEventListener('beforeunload', function (e) {
-  e.preventDefault();
-  e.returnValue = '';
-});
