@@ -51,7 +51,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="main.js?version=1"></script>
+    <script src="main.js?version=2"></script>
 </body>
 </html>
 

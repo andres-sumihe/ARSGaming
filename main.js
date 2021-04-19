@@ -15,7 +15,8 @@ var stopwatch =( async (elem, id, options )=> {
     }
   }
   var data = await getTime(id);
-  var waktu_mulai
+  var waktu_mulai = data[0].waktu_mulai;
+  console.log(data[0].waktu_mulai);
   var timer = createTimer(), 
     startButton = createButton("start", start),
     stopButton = createButton("stop", stop),
@@ -91,6 +92,35 @@ var stopwatch =( async (elem, id, options )=> {
     return a;
   }
 
+  if(waktu_mulai){
+    offset = waktu_mulai;
+    const waktu = Date.now() - waktu_mulai;
+    var x = new Date(+waktu_mulai);
+    var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
+    jamMulai = x.getHours()+ ":" +  x.getMinutes() + ":" +  x.getSeconds()  + ampm;
+    // console.log(jamMulai)
+    tdJamMulaiValue.innerHTML = ": "+jamMulai;
+    interval = setInterval(update, 1000);
+    var h = Math.floor(waktu / (1000 * 60 * 60)) % 24;
+    var m = Math.floor(waktu / (1000 * 60)) % 60;
+    var s = Math.floor(waktu / 1000) % 60;
+
+    if (h < 10) {
+      h = "0" + h;
+    }
+    if (m < 10) {
+      m = "0" + m;
+    }
+    if (s < 10) {
+      s = "0" + s;
+    }
+    var detik = waktu / 1000;
+    harga = Math.floor(detik / 288) * 400;
+    if(Math.floor(detik/288) % 12 == 0)
+    harga+=200;
+    mogaJadiHehe.innerHTML = ": Rp. "+ harga.toFixed(2);
+  }
+
   function start() {
     if (!interval) {
       offset = Date.now();
@@ -99,14 +129,14 @@ var stopwatch =( async (elem, id, options )=> {
       jamMulai = x.getHours( )+ ":" +  x.getMinutes() + ":" +  x.getSeconds()  + ampm;
       tdJamMulaiValue.innerHTML = ": "+jamMulai;
       interval = setInterval(update, 1000);
+      $.post(window.location.pathname+'/index.php', {
+        name: "tv"+id,
+        time: offset
+      }, function(response) {
+        // Log the response to the console
+        console.log("Response: "+response);
+      });
     }
-    $.post(window.location.pathname+'/index.php', {
-      name: "tv"+id,
-      time: offset
-    }, function(response) {
-      // Log the response to the console
-      console.log("Response: "+response);
-    });
   }
 
   function stop() {
@@ -142,8 +172,10 @@ var stopwatch =( async (elem, id, options )=> {
     if (s < 10) {
       s = "0" + s;
     }
-    (s % 5 == 0) ? harga+=6.9 : harga = harga; 
-
+    if(m%5 == 0 ) 
+    harga = Math.floor(clock/1000 / 288) * 400;
+    else if (h >=59)
+    harga += 200;
     timer.innerHTML = h + ':' + m + ':' + s ;
     mogaJadiHehe.innerHTML = ": Rp. "+ harga.toFixed(2);
 

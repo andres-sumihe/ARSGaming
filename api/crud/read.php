@@ -2,7 +2,6 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-include_once '../objects/Stopwatch.php';
 include_once '../../TxtDb.class.php';
   
 // instantiate database and stopwatch object
